@@ -1,0 +1,12 @@
+export CPLUS_INCLUDE_PATH=/mnt/hgfs/VM共享文件夹/mechanical_arm_7_axis_two_arms/include:$CPLUS_INCLUDE_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/hgfs/VM共享文件夹/mechanical_arm_7_axis_two_arms/include/can
+g++ main.cpp -L../include/can -lmylibscan -lcontrolcan -o move_sov
+sudo ./move_sov
+
+生成.so文件：
+g++ -c -fpic include/Ti5BASIC.cpp include/Ti5LOGIC.cpp include/Ti5MOVE.cpp include/mathfunc.cpp
+g++ -shared mathfunc.o Ti5BASIC.o Ti5LOGIC.o Ti5MOVE.o -o lib_mathfunc.so
+
+
+g++ test.cpp -L./include -lmylibti5  -lspdlog -lfmt -ludev -L./include/can -lmylibscan -lcontrolcan  -o move_sov
+
