@@ -7,6 +7,7 @@
 // #include "can/controlcan.h"
 #include "controlcan.h"
 
+extern int CanNum;
  /*登录并初始化can设备
     参数：无
     返回值
