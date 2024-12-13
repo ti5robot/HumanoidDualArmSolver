@@ -284,7 +284,7 @@ enum ArmSide {
   	side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
   	pos：目标位置
   	value：dim的值
-  	dim：0~2 代表x,y,z
+  	dim：0~2 代表x,y,z，-1的时候是没有臂角约束，只会接收末端位姿，其他参数忽略
   	absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
   	canInd：can通道
   	deviceInd：can设备号
