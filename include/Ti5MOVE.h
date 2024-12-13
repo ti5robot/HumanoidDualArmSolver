@@ -14,6 +14,7 @@
 #include <mutex>
 #include "Ti5CAN_Driver.h"
 
+#define USLEEPTIME 3000
 
 extern "C"{ //添加：extern C
 	class ArmController{
@@ -33,6 +34,7 @@ extern "C"{ //添加：extern C
 		ArmController(uint8_t canid[IDNUM]);
         // void plan_move(float crtj[IDNUM],int canInd,int deviceInd);
 		void plan_move(int deviceInd, int canInd,float crtj[IDNUM]);
+		void new_plan_move(int deviceInd,int canInd,float crtj[IDNUM]);//mfs add 2024-12-3
 		void GETP_plan_move(float crtj[IDNUM],float *CUrrentJointPosition,int deviceInd,int canInd);
 		float NMAX = 3000;  //所有电机内核最大转速值（(NMAX/100)圈/秒）
 		float j2p = scale * 65536 / 2 / pi;   //电机外圈角度到内圈步数的转化

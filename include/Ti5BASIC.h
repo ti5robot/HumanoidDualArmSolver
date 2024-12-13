@@ -31,6 +31,7 @@
 
 #define MAX_IP_ADDR_LEN 256 // 存储IP地址的最大长度
 
+
 // extern float arr_s[6];
 
 extern bool flag;
@@ -40,20 +41,21 @@ extern string log_path; // log文件
 extern char LogInfo[100]; // 存储写入log文件的信息
 
 extern char Info_Str[100]; // 定义一个字符数组用于存储 flag 的字符串表示
-class ArmController;  // 声明ArmController类
+class ArmController;       // 声明ArmController类
 
-extern uint8_t l_id[IDNUM],r_id[IDNUM]; // 声明左臂和右臂的canID数组
-extern ArmController l_controller;  // 声明TH_L对象
-extern ArmController r_controller;  // 声明TH_R对象
+extern uint8_t l_id[IDNUM], r_id[IDNUM]; // 声明左臂和右臂的canID数组
+extern ArmController l_controller;       // 声明TH_L对象
+extern ArmController r_controller;       // 声明TH_R对象
 
-extern class humanoidLeftArm l_solver;//数学上的解算器
-extern class humanoidRightArm r_solver; //解算器
+extern class humanoidLeftArm l_solver;  // 数学上的解算器
+extern class humanoidRightArm r_solver; // 解算器
 
-enum ArmSide {
-    LEFT_ARM, //左臂
-    RIGHT_ARM //右臂
+
+enum ArmSide
+{
+  LEFT_ARM, // 左臂
+  RIGHT_ARM // 右臂
 };
-
 
 extern "C"
 { // 添加extern "C"
@@ -72,19 +74,19 @@ extern "C"
   */
   std::vector<std::string> query_can();
 
-    /*获取电机错误状态
-    参数：
-      side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
-      deviceInd：can设备号
-      canInd：can通道
-    返回值：为电机错误
-      0：无错误
-      1：软件错误
-      2：过压
-      4：欠压
-      16：启动错误
-  */
-  int get_elektrische_Maschinen_status(ArmSide side,int deviceInd,int canInd);
+  /*获取电机错误状态
+  参数：
+    side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+    deviceInd：can设备号
+    canInd：can通道
+  返回值：为电机错误
+    0：无错误
+    1：软件错误
+    2：过压
+    4：欠压
+    16：启动错误
+*/
+  int get_elektrische_Maschinen_status(ArmSide side, int deviceInd, int canInd);
 
   /*清除电机错误
     参数：
@@ -92,7 +94,7 @@ extern "C"
       deviceInd：can设备号
       canInd：can通道
   */
-  void clear_elc_error(ArmSide side,int deviceInd,int canInd);
+  void clear_elc_error(ArmSide side, int deviceInd, int canInd);
 
   /*机械臂刹车
   参数：
@@ -103,24 +105,24 @@ extern "C"
     true：成功
     false：失败
   */
-    bool brake(ArmSide side,int deviceInd,int canInd);
+  bool brake(ArmSide side, int deviceInd, int canInd);
 
-    /*将数据记录下来写入文件
+  /*将数据记录下来写入文件
+参数：
+    pj_flag：角度或者位姿标识,1为角度 ，0为坐标
+    filename：存储文件名
+    array[6]：被保存的值
+*/
+  void write_value(int pj_flag, string filename, float array[7]);
+
+  /*机械臂回到原点
   参数：
-      pj_flag：角度或者位姿标识,1为角度 ，0为坐标
-      filename：存储文件名
-      array[6]：被保存的值
+    side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+    canInd：can通道
+    deviceInd：can设备号
+  返回值：无
   */
-    void write_value(int pj_flag, string filename, float array[7]);
-
-    /*机械臂回到原点
-    参数：
-      side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
-      canInd：can通道
-      deviceInd：can设备号
-    返回值：无
-    */
-    void mechanical_arm_origin(ArmSide side,int deviceInd,int canInd);
+  void mechanical_arm_origin(ArmSide side, int deviceInd, int canInd);
 
   /*机械臂关节运动
   参数：
@@ -129,7 +131,8 @@ extern "C"
     canInd：can通道
     DeviceInd：can设备号
   返回值：无*/
-	void joint_to_move(ArmSide side,float *goal_j,int deviceInd,int canInd);
+  void joint_to_move(ArmSide side, float *goal_j, int deviceInd, int canInd);
+  void new_joint_to_move(ArmSide side, float *goal_j, int deviceInd, int canInd);
 
   /*机械臂关节运动，同时获取当前位置
     参数：
@@ -140,20 +143,20 @@ extern "C"
         deviceInd：can设备号
     返回值：无
   */
-  void GetP_joint_to_move(ArmSide side,float *goal_j,float *CUrrentJointPosition,int deviceInd,int canInd);
+  void GetP_joint_to_move(ArmSide side, float *goal_j, float *CUrrentJointPosition, int deviceInd, int canInd);
 
   /*pos运动
   参数：
       side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
       pos：目标位置
       value：dim的值
-      dim：0~2 代表x,y,z
+      dim：-1~2 代表x,y,z， -1的时候是没有臂角约束，只会接收末端位姿，其他参数忽略
       absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
       canInd：can通道
       deviceInd：can设备号
   返回值：无
   */
-  void pos_to_move(ArmSide side,float *pos,float value,int dim,bool absolute,int deviceInd,int canInd);
+  void pos_to_move(ArmSide side, float *pos, float value, int dim, bool absolute, int deviceInd, int canInd);
 
   /*获取当前角度
   参数：
@@ -162,16 +165,25 @@ extern "C"
       canInd：can通道
       deviceInd：can设备号
     */
-    void get_current_angle(ArmSide side,float goal_j[7],int deviceInd,int canInd);
-  
- /*获取当前位姿
+  void get_current_angle(ArmSide side, float goal_j[7], int deviceInd, int canInd);
+
+  /*获取当前位姿
+     参数：
+         side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+         posz：存储位姿的数组
+         canInd：can通道
+         deviceInd：can设备号
+     */
+  void get_current_pose(ArmSide side, float posz[7], int deviceInd, int canInd);
+
+  /*设置为电流模式，并设置目标电流
     参数：
-        side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
-        posz：存储位姿的数组
-        canInd：can通道
-        deviceInd：can设备号
-    */
-    void get_current_pose(ArmSide side,float posz[7],int deviceInd,int canInd);
+         side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+         current: 目标电流
+         canInd：can通道
+         deviceInd：can设备号
+  */
+  void set_current_mode(ArmSide side, uint32_t current[7], int deviceInd, int canInd);
 
 } // 添加extern "C"
 #endif

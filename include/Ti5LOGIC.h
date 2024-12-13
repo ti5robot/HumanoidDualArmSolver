@@ -12,6 +12,7 @@ extern "C"
 	class pos_trans
 	{
 	protected:
+		float orij[7];
 		float prcj = 0.017;
 		float scd = sin(prcj) * sin(prcj);
 		float prc1 = float(int(10000 * sin(prcj) + 1)) / 10000;
@@ -37,8 +38,8 @@ extern "C"
 		// 根据位姿计算变换矩阵
 		void Pos2MatrixT(float T[4][4]);
 		// 修正角度并检测关节范围是否合法（相邻连杆间是否碰撞）
-		bool mendjoints(float j0[7]);
-		bool checkcalj(float j0[7]);
+		bool mendjoints();
+		bool checkcalj();
 		// 检测所有连杆间的碰撞
 		bool check_colsp();
 		
@@ -65,9 +66,9 @@ extern "C"
 		// 初始化数学模型参数
 		void init_model_structure()
 		{
-			float M = 1.8;
-			jr1[0] = -M, jr1[1] = -M, jr1[2] = -M, jr1[3] = -M, jr1[4] = -M, jr1[5] = -M, jr1[6] = 0;
-			jr2[0] = M, jr2[1] = M, jr2[2] = M, jr2[3] = 0, jr2[4] = M, jr2[5] = M, jr2[6] = M;
+			float M = 1.57;
+			jr1[0] = -M, jr1[1] = -M, jr1[2] = -0.5, jr1[3] = -M, jr1[4] = -M, jr1[5] = -M, jr1[6] = -pi/6;
+			jr2[0] = M, jr2[1] = M, jr2[2] = 0.5, jr2[3] = 0, jr2[4] = M, jr2[5] = M, jr2[6] = M;
 			gap = abs(jr1[0]);
 			for (int i = 1; i < 7; i++)
 				if (abs(jr1[i]) > gap)
@@ -100,7 +101,7 @@ extern "C"
 		void fromS5toS4(float P0[3], float P[3], bool p);
 		void fromS6toS5(float P0[3], float P[3], bool p);
 		void fromS7toS6(float P0[3], float P[3], bool p);
-		bool solve_in_S3(float j3, float *d23_2);
+		bool solve_in_S3(float j0,float *d23_2);
 		bool solve_in_S2();
 		// 逆运动解算器
 		bool Points2J();
@@ -108,7 +109,6 @@ extern "C"
 		void J2MatrixT(float T[4][4]);
 
 	public:
-		float orij[7];
 		humanoidLeftArm();
 		// 检测逆运动解出的角是否满足原始位姿
 		bool checkacc();
@@ -125,7 +125,7 @@ extern "C"
 		  参数：
 			pos:目标位置
 			value：dim的值
-			dim：0~2 代表x,y,z
+			dim：-1~2 代表x,y,z，当值是-1的时候忽略臂角值，只接收末端位姿的值
 			absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
 		*/
 		bool l_backward_move(float pos[6], float value, int dim, bool absolute);
@@ -141,7 +141,6 @@ extern "C"
 	public:
 		humanoidRightArm();
 		bool r_forward_move(float goal_j[7]);
-		bool r_forward_move_2(float goal_j[7]);
 		void get_crt_j(float joints[7]);
 		void get_crt_pos(float postrue[6]);
 		bool r_backward_move(float postrue[6], float value, int dim, bool absolute);
