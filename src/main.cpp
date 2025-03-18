@@ -58,8 +58,10 @@ void test2()
 
 int main()
 {
-    l_controller.NMAX=1000;
-    r_controller.NMAX=1000;
+    l_controller.NMAX=1500;
+    r_controller.NMAX=1500;
+    l_solver.gap=0.5;
+    r_solver.gap=0.5;
     vector<string> productSerialNumbers = query_can();
     if (productSerialNumbers.empty())
     {
@@ -85,6 +87,12 @@ int main()
     {
         cout<<"init can success!"<<endl;
     }
+
+    // LLL_keyboard_controller_J(0,0);
+    LLL_keyboard_controller_P(0,0);
+    // RRR_keyboard_controller_J(0,0);
+    // RRR_keyboard_controller_P(0,0);
+    
     mechanical_arm_origin(LEFT_ARM,0,0);
     mechanical_arm_origin(RIGHT_ARM,1,0);
     /////////////////////////////////////获取当前角度///////////////////////////////////////////////

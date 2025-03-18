@@ -12,6 +12,7 @@ extern "C"
 	class pos_trans
 	{
 	protected:
+		float j[7] = {0, 0, 0, 0, 0, 0, 0};
 		float orij[7];
 		float prcj = 0.017;
 		float scd = sin(prcj) * sin(prcj);
@@ -48,7 +49,7 @@ extern "C"
 		float jr2[7] = {pi, pi, pi, pi, pi, pi, pi};
 		float gap0, gap;
 		float ypr[6] = {0, 0, 0};
-		float j[7] = {0, 0, 0, 0, 0, 0, 0};
+		// float j[7] = {0, 0, 0, 0, 0, 0, 0};
 		void showpointsinfo();
 	};
 
@@ -59,16 +60,19 @@ extern "C"
 		void init_arm_structure()
 		{
 			rodnum = 3;
-			rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 连杆半径
-			rod[0].l = 171, rod[1].l = 250, rod[2].l = 250; // 连杆长度
+			// rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 连杆半径 170A
+			// rod[0].l = 171, rod[1].l = 250, rod[2].l = 250; // 连杆长度 170A
+			rod[0].r = 45, rod[1].r = 42, rod[2].r = 37.5;	// 连杆半径 T230
+			rod[0].l = 234.5, rod[1].l = 339, rod[2].l = 301.5; // 连杆长度 T230
 			init_rodindex();
 		}
 		// 初始化数学模型参数
 		void init_model_structure()
 		{
 			float M = 1.57;
-			jr1[0] = -M, jr1[1] = -M, jr1[2] = -0.5, jr1[3] = -M, jr1[4] = -M, jr1[5] = -M, jr1[6] = -pi/6;
-			jr2[0] = M, jr2[1] = M, jr2[2] = 0.5, jr2[3] = 0, jr2[4] = M, jr2[5] = M, jr2[6] = M;
+			jr1[6] = -pi/6;
+			// jr1[0] = -M, jr1[1] = -M, jr1[2] = -0.5, jr1[3] = -M, jr1[4] = -M, jr1[5] = -M, jr1[6] = -pi/6;
+			// jr2[0] = M, jr2[1] = M, jr2[2] = 0.5, jr2[3] = 0, jr2[4] = M, jr2[5] = M, jr2[6] = M;
 			gap = abs(jr1[0]);
 			for (int i = 1; i < 7; i++)
 				if (abs(jr1[i]) > gap)
@@ -101,7 +105,8 @@ extern "C"
 		void fromS5toS4(float P0[3], float P[3], bool p);
 		void fromS6toS5(float P0[3], float P[3], bool p);
 		void fromS7toS6(float P0[3], float P[3], bool p);
-		bool solve_in_S3(float j0,float *d23_2);
+		bool solve_in_S6();
+		bool solve_in_S4();
 		bool solve_in_S2();
 		// 逆运动解算器
 		bool Points2J();
@@ -125,10 +130,11 @@ extern "C"
 		  参数：
 			pos:目标位置
 			value：dim的值
-			dim：-1~2 代表x,y,z，当值是-1的时候忽略臂角值，只接收末端位姿的值
+			dim：-1~2 代表x,y,z，-1的时候是没有臂角约束，只会接收末端位姿，其他参数忽略
 			absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
 		*/
-		bool l_backward_move(float pos[6], float value, int dim, bool absolute);
+		// bool l_backward_move(float pos[6], float value, int dim, bool absolute);
+		bool l_backward_move(float pos[6]);
 		// 测试fromSi2Sj函数是否正确（是否抄错）
 		void testj2p();
 		void show_crt_pos();
@@ -143,7 +149,8 @@ extern "C"
 		bool r_forward_move(float goal_j[7]);
 		void get_crt_j(float joints[7]);
 		void get_crt_pos(float postrue[6]);
-		bool r_backward_move(float postrue[6], float value, int dim, bool absolute);
+		// bool r_backward_move(float postrue[6], float value, int dim, bool absolute);
+		bool r_backward_move(float postrue[6]);
 		void show_crt_pos();
 		void show_crt_j();
 		void showpointsinfo();

@@ -22,6 +22,7 @@ extern "C"{ //添加：extern C
 		float AG = 0.005;   //启停时变速的采样间距（秒
 		float scale = 101; //电机内圈与外圈的速度比
 		float n2p = 655.36; //内圈转速到步速的转化系数
+		// float n2p = 655.36/101; //双编码器的 内圈转速到步速的转化系数
 		float mvtime = 0;
 		// float j2p = scale * 65536 / 2 / pi;   //电机外圈角度到内圈步数的转化
 		float min_time = 0;
@@ -38,6 +39,7 @@ extern "C"{ //添加：extern C
 		void GETP_plan_move(float crtj[IDNUM],float *CUrrentJointPosition,int deviceInd,int canInd);
 		float NMAX = 3000;  //所有电机内核最大转速值（(NMAX/100)圈/秒）
 		float j2p = scale * 65536 / 2 / pi;   //电机外圈角度到内圈步数的转化
+		// float j2p = 131072/pi;   //双编码器 电机外圈角度到内圈步数的转化
 	};
 }//添加：extern C
 
