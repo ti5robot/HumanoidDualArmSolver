@@ -156,7 +156,8 @@ extern "C"
       deviceInd：can设备号
   返回值：无
   */
-  void pos_to_move(ArmSide side, float *pos, float value, int dim, bool absolute, int deviceInd, int canInd);
+  // void pos_to_move(ArmSide side, float *pos, float value, int dim, bool absolute, int deviceInd, int canInd);
+  bool pos_to_move(ArmSide side, float *pos, int deviceInd, int canInd);
 
   /*获取当前角度
   参数：
@@ -184,6 +185,50 @@ extern "C"
          deviceInd：can设备号
   */
   void set_current_mode(ArmSide side, uint32_t current[7], int deviceInd, int canInd);
+
+  /*设置键盘控制模式
+    参数：
+      canInd：can通道
+      deviceInd：can设备号
+  */
+  void LLL_keyboard_controller_J(int deviceInd, int canInd);
+  void LLL_keyboard_controller_P(int deviceInd, int canInd);
+  void RRR_keyboard_controller_J(int deviceInd, int canInd);
+  void RRR_keyboard_controller_P(int deviceInd, int canInd);
+  // void L_keyboard_controller(int deviceInd, int canInd);
+  // void R_keyboard_controller(int deviceInd, int canInd);
+
+  /*获取电机当前位置
+    参数：
+      canInd：can通道
+      deviceInd：can设备号
+      MotorsTotal：电机数量
+      MotorsIDlist：电机ID列表
+      data：存储电机位置数据的数组
+  */
+  void get_motor_position(int deviceInd, int canInd, int MotorsTotal,uint8_t *MotorsIDlist,int32_t *MotorPosition);
+
+  /*设置电机当前位置
+    参数：
+      canInd：can通道
+      deviceInd：can设备号
+      MotorsTotal：电机数量
+      MotorsIDlist：电机ID列表
+      data：存储电机位置数据的数组
+  */
+  void set_motor_position(int deviceInd, int canInd, int MotorsTotal,uint8_t *MotorsIDlist,int32_t *MotorPosition);
+
+
+  // 设定终端为非阻塞模式
+  void setNonBlocking(bool enable) ;
+
+  // 设定文件描述符为非阻塞
+  void setNonBlockingInput() ;
+  // 清空键盘缓冲区
+  void clearStdinBuffer();
+
+  // 读取键盘输入
+  char ssscanKeyboard();
 
 } // 添加extern "C"
 #endif

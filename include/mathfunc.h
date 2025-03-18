@@ -19,7 +19,7 @@ void vec_cross(float v1[3],float v2[3],float v[3]);
 float calcu_angle(float sa,float ca,float cp2);
 
 
-void MatrixmultPoint(float P0[3],float T[4][4],float P[3]);
+void MatrixmultPoint(float T[4][4],float P0[3],float P[3]);
 void Matrixmult(float T1[4][4],float T2[4][4],float T[4][4]);
 void MatrixT2MatrixI(float T[4][4],float I[4][4]);
 
