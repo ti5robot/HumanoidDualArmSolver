@@ -60,10 +60,10 @@ extern "C"
 		void init_arm_structure()
 		{
 			rodnum = 3;
-			// rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 连杆半径 170A
-			// rod[0].l = 171, rod[1].l = 250, rod[2].l = 250; // 连杆长度 170A
-			rod[0].r = 45, rod[1].r = 42, rod[2].r = 37.5;	// 连杆半径 T230
-			rod[0].l = 234.5, rod[1].l = 339, rod[2].l = 301.5; // 连杆长度 T230
+			rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 连杆半径 170A
+			rod[0].l = 171, rod[1].l = 250, rod[2].l = 250; // 连杆长度 170A
+			// rod[0].r = 45, rod[1].r = 42, rod[2].r = 37.5;	// 连杆半径 T230
+			// rod[0].l = 234.5, rod[1].l = 339, rod[2].l = 301.5; // 连杆长度 T230
 			init_rodindex();
 		}
 		// 初始化数学模型参数
