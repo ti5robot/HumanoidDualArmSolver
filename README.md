@@ -302,16 +302,13 @@ enum ArmSide {
 	 }
   ```
   
-+ void pos_to_move(ArmSide side,float *pos,float value,int dim,bool absolute,int deviceInd,int canInd);
++ void pos_to_move(ArmSide side,float *pos,int deviceInd,int canInd);
   ```
     函数功能：机械臂位姿运动
     返回值：无
     参数：
   	side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
   	pos：目标位置
-  	value：dim的值
-  	dim：0~2 代表x,y,z，-1的时候是没有臂角约束，只会接收末端位姿，其他参数忽略
-  	absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
   	canInd：can通道
   	deviceInd：can设备号
   示例：
@@ -319,8 +316,8 @@ enum ArmSide {
      {
   	Start();
   	float l_pos[6] = {347.931, 319.393, 56.2954, -1.21035, -2.73428, -0.883535}, r_pos[6] = {347.931, -319.393, 56.2954, -1.93124, -0.407309, -2.25806};
-  	pos_to_move(LEFT_ARM, l_pos, 202.702, 0, true,0,0);
-  	pos_to_move(RIGHT_ARM, r_pos, 202.702, 0, true,0,0);
+  	pos_to_move(LEFT_ARM, l_pos,0,0);
+  	pos_to_move(RIGHT_ARM, r_pos,0,0);
   	Exit();
   	return 0;
      }
