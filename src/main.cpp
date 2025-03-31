@@ -16,6 +16,12 @@
 #include <mutex>
 #include <shared_mutex>
 #include "Ti5CAN_Driver.h"
+#include <map>
+#include <termios.h>
+#include <fcntl.h>
+#include <algorithm>
+#include <sys/socket.h>
+#include <arpa/inet.h>
 
 
 #define RESET "\033[0m"
@@ -87,14 +93,15 @@ int main()
     {
         cout<<"init can success!"<<endl;
     }
-
+    
     // LLL_keyboard_controller_J(0,0);
-    LLL_keyboard_controller_P(0,0);
+    // LLL_keyboard_controller_P(0,0);
     // RRR_keyboard_controller_J(0,0);
     // RRR_keyboard_controller_P(0,0);
     
     mechanical_arm_origin(LEFT_ARM,0,0);
-    mechanical_arm_origin(RIGHT_ARM,1,0);
+    // mechanical_arm_origin(RIGHT_ARM,0,0);
+    ti5_socket_server(0,0,SERVER_PORT);
     /////////////////////////////////////获取当前角度///////////////////////////////////////////////
     float test_2[7];
     get_current_angle(LEFT_ARM, test_2,0,0);
