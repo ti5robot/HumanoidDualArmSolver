@@ -136,6 +136,32 @@ enum ArmSide {
     }
   ```
 
+  
++ int ti5_socket_server(int deviceInd, int canInd,int port);
+  ```
+  /*socket通信
+  参数：
+    deviceInd：can设备号
+    canInd：can通道
+    port：端口号
+  发送端发送数据格式：{标识位，数据}
+        标识位	
+        0x01	左臂pos 
+        0x02	右臂pos 
+        0x03	左臂joint 
+        0x04	右臂joint 
+    */
+  示例：
+      int main()
+      {
+  	Start();
+  	ti5_socket_server(0,0,SERVER_PORT);
+  	Exit();
+  	return 0;
+       }
+  ```
+
+  
 + int get_elektrische_Maschinen_status(ArmSide side,int deviceInd,int canInd);
   ```
   函数功能：获取电机错误状态
