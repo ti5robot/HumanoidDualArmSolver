@@ -158,8 +158,9 @@ enum ArmSide {
       int main()
       {
   	Start();
-  	get_elektrische_Maschinen_status(LEFT_ARM,0,0);
-  	get_elektrische_Maschinen_status(RIGHT_ARM,0,0);
+  	int32_t data[7];
+  	get_elektrische_Maschinen_status(LEFT_ARM,0,0,data);
+  	get_elektrische_Maschinen_status(RIGHT_ARM,0,0,data);
   	Exit();
   	return 0;
        }
@@ -281,7 +282,7 @@ enum ArmSide {
 	 }
   ```
   
-+ void pos_to_move(ArmSide side,float *pos,float value,int dim,bool absolute,int deviceInd,int canInd);
++ void pos_to_move(ArmSide side,float *pos,int deviceInd,int canInd);
   ```
     函数功能：机械臂位姿运动
     返回值：无
@@ -298,8 +299,8 @@ enum ArmSide {
      {
   	Start();
   	float l_pos[6] = {347.931, 319.393, 56.2954, -1.21035, -2.73428, -0.883535}, r_pos[6] = {347.931, -319.393, 56.2954, -1.93124, -0.407309, -2.25806};
-  	pos_to_move(LEFT_ARM, l_pos, 202.702, 0, true,0,0);
-  	pos_to_move(RIGHT_ARM, r_pos, 202.702, 0, true,0,0);
+  	pos_to_move(LEFT_ARM, l_pos,0,0);
+  	pos_to_move(RIGHT_ARM, r_pos,0,0);
   	Exit();
   	return 0;
      }
