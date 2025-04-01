@@ -164,7 +164,7 @@ enum ArmSide {
   
 + void get_mechanicalarm_status(ArmSide side, int deviceInd, int canInd, int32_t *dataList);
   ```
-  函数功能：获取电机错误状态
+  函数功能：获取机械臂电机错误状态
   参数：
     side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
     deviceInd：can设备号
