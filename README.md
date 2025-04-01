@@ -136,19 +136,24 @@ enum ArmSide {
     }
   ```
 
-+ int get_elektrische_Maschinen_status(ArmSide side,int deviceInd,int canInd);
++ void get_mechanicalarm_status(ArmSide side, int deviceInd, int canInd, int32_t *dataList);
   ```
-  函数功能：获取电机错误状态
-  返回值：为电机错误
-      0：无错误
-      1：软件错误
-      2：过压
-      4：欠压
-      16：启动错误
+  函数功能：获取机械臂电机错误状态
   参数：
-      side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
-      deviceInd：can设备号
-      canInd：can通道
+    side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+    deviceInd：can设备号
+    canInd：can通道
+    dataList:接收数据的数组，错误状态
+      对应位为0表示无错误，为1表示出现错误
+      bit0代表软件错误，如电机运行时写入FLASH等
+      bit1代表过压
+      bit2代表欠压
+      bit4代表启动错误
+      bit5代表速度反馈错误
+      bit6代表过流
+      bit16代表编码器通讯错误
+      bit17代表电机温度过高
+      bit18代表电路板温度过高
   示例：
       int main()
       {
