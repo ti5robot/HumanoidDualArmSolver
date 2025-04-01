@@ -95,6 +95,7 @@ extern "C"
     side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
     deviceInd：can设备号
     canInd：can通道
+    dataList:接收数据的数组，错误状态
   返回值：为电机错误
     0：无错误
     1：软件错误
@@ -102,7 +103,8 @@ extern "C"
     4：欠压
     16：启动错误
 */
-  int get_elektrische_Maschinen_status(ArmSide side, int deviceInd, int canInd);
+  // int get_mechanicalarm_Maschinen_status(ArmSide side, int deviceInd, int canInd);
+  void get_mechanicalarm_status(ArmSide side, int deviceInd, int canInd, int32_t *dataList);
 
   /*清除电机错误
     参数：
