@@ -175,8 +175,9 @@ enum ArmSide {
       int main()
       {
   	Start();
-  	get_mechanicalarm_status(LEFT_ARM,0,0);
-  	get_mechanicalarm_status(RIGHT_ARM,0,0);
+  	int32_t data[7];
+  	get_mechanicalarm_status(LEFT_ARM,0,0,data);
+  	get_mechanicalarm_status(RIGHT_ARM,0,0,data);
   	Exit();
   	return 0;
        }
