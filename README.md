@@ -162,25 +162,21 @@ enum ArmSide {
   ```
 
   
-+ int get_elektrische_Maschinen_status(ArmSide side,int deviceInd,int canInd);
++ void get_mechanicalarm_status(ArmSide side, int deviceInd, int canInd, int32_t *dataList);
   ```
-  函数功能：获取电机错误状态
-  返回值：为电机错误
-      0：无错误
-      1：软件错误
-      2：过压
-      4：欠压
-      16：启动错误
+    /*获取电机错误状态
   参数：
-      side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
-      deviceInd：can设备号
-      canInd：can通道
+    side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
+    deviceInd：can设备号
+    canInd：can通道
+    dataList:接收数据的数组，错误状态
+*/
   示例：
       int main()
       {
   	Start();
-  	get_elektrische_Maschinen_status(LEFT_ARM,0,0);
-  	get_elektrische_Maschinen_status(RIGHT_ARM,0,0);
+  	get_mechanicalarm_status(LEFT_ARM,0,0);
+  	get_mechanicalarm_status(RIGHT_ARM,0,0);
   	Exit();
   	return 0;
        }
