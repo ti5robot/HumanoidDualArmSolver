@@ -171,8 +171,8 @@ int main()
     /////////////////////////////////////位姿运动并获取当前位姿///////////////////////////////////////////////
     float l_pos[6] = {347.931, 319.393, 56.2954, -1.21035, -2.73428, -0.883535}, r_pos[6] = {347.931, -319.393, 56.2954, -1.93124, -0.407309, -2.25806};
     // float test[6] = {0};
-    pos_to_move(LEFT_ARM, l_pos, 202.702, 0, true,0,0);
-    pos_to_move(RIGHT_ARM, r_pos, 202.702, 0, true,1,0);
+    pos_to_move(LEFT_ARM, l_pos,0,0);
+    pos_to_move(RIGHT_ARM, r_pos,1,0);
 
     get_current_pose(LEFT_ARM, test,0,0);
     for (int i = 0; i < 6; i++)
