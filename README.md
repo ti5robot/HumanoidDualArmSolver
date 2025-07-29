@@ -423,8 +423,8 @@ sudo cp * /usr/lib
 ```
 cd ~/your_name_folder/src
 export CPLUS_INCLUDE_PATH=/your_name_folder/include:$CPLUS_INCLUDE_PATH
-g++ main.cpp  -L./include -lmylibti5_2004 -L./include/can -lmylibscan -lcontrolcan  -lfmt -ludev -o move_sov(在ubuntu2004下)
-g++ main.cpp  -L./include -lmylibti5 -L./include/can -lmylibscan -lcontrolcan  -lfmt -ludev -o move_sov(在ubuntu2204下)
+g++ main.cpp  -L./include -lmylibti5_2004 -L./替换为真实路径路径 -lmylibscan -lcontrolcan  -lfmt -ludev -o move_sov(在ubuntu2004下)
+g++ main.cpp  -L./include -lmylibti5 -L./替换为真实路径 -lmylibscan -lcontrolcan  -lfmt -ludev -o move_sov(在ubuntu2204下)
 ```
 **运行**:
 ```
