@@ -393,7 +393,7 @@ enum ArmSide {
 sudo apt update
 sudo apt install -y libspdlog-dev libopencv-dev libudev-dev libfmt-dev
 ```
-然后将usrlib中的libcontrolcan.so  libmylibscan.so libmylibti5.so文件拷贝到/usr/lib/下
+然后将usrlib中的libcontrolcan.so   libmylibti5.so文件拷贝到/usr/lib/下
 ```
 cd ~/your_name_folder/usrlib
 sudo cp * /usr/lib
