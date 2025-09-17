@@ -456,10 +456,10 @@ sudo ./move_sov
 注意机械臂处在一个安全的环境中
 
 ## 4. python调用
-python的库为`ti5_bindings_new.cpython-310-x86_64-linux-gnu`
+python的库为`ti5_robot_py.cpython-310-x86_64-linux-gnu`
 在python程序中用以下方法导入：
 ```
-import ti5_bindings_new as ti5
+import ti5_robot_py as ti5
 ```
 python中所用的控制函数与c++中的一致，具体使用方法请查看`python`文件夹中的`test.py`文件。
 
