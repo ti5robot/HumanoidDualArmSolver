@@ -64,6 +64,10 @@ extern "C"
 			rod[0].l = 171, rod[1].l = 250, rod[2].l = 250; // 连杆长度 170A
 			// rod[0].r = 45, rod[1].r = 42, rod[2].r = 37.5;	// 连杆半径 T230
 			// rod[0].l = 234.5, rod[1].l = 339, rod[2].l = 301.5; // 连杆长度 T230
+			// rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 擎朗连杆半径
+			// rod[0].l = 171, rod[1].l = 260, rod[2].l = 259; // 擎朗连杆长度
+			// rod[0].r = 10, rod[1].r = 10, rod[2].r = 10;	// 连杆半径 卡诺普65
+			// rod[0].l = 181, rod[1].l = 240, rod[2].l = 229; // 连杆长度 卡诺普65
 			init_rodindex();
 		}
 		// 初始化数学模型参数
@@ -143,14 +147,15 @@ extern "C"
 	class humanoidRightArm : public humanoidLeftArm
 	{
 	private:
-		void get_r_ypr(float r_ypr[3]);
+		// void get_r_ypr(float r_ypr[3]);
 	public:
 		humanoidRightArm();
 		bool r_forward_move(float goal_j[7]);
 		void get_crt_j(float joints[7]);
 		void get_crt_pos(float postrue[6]);
 		// bool r_backward_move(float postrue[6], float value, int dim, bool absolute);
-		bool r_backward_move(float postrue[6]);
+		// bool r_backward_move(float postrue[6]);//2025-4-11更新
+		bool r_backward_move(float r_pos[6]);
 		void show_crt_pos();
 		void show_crt_j();
 		void showpointsinfo();

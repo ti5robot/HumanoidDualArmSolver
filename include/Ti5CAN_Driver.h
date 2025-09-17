@@ -58,7 +58,7 @@ void toIntArray(int number, int *res, int size);
     CANInd：can通道索引 （通道1：0,通道2：1）
     numOfActuator：发送指令的电机数量
     canIdList：电机canId列表
-    commandList：指令列表
+    command：指令
     dataList：接收数据列表
 */
 void sendSimpleCanCommand(int DeviceInd, int CANInd,uint8_t numOfActuator, uint8_t *canIdList, uint8_t command,int32_t *dataList);

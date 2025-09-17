@@ -90,12 +90,22 @@ extern "C"
     */
   int ti5_socket_server(int deviceInd, int canInd,int port);
 
-  /*获取电机错误状态
+  /*获取机械臂电机错误状态
   参数：
     side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
     deviceInd：can设备号
     canInd：can通道
     dataList:接收数据的数组，错误状态
+      对应位为0表示无错误，为1表示出现错误
+      bit0代表软件错误，如电机运行时写入FLASH等
+      bit1代表过压
+      bit2代表欠压
+      bit4代表启动错误
+      bit5代表速度反馈错误
+      bit6代表过流
+      bit16代表编码器通讯错误
+      bit17代表电机温度过高
+      bit18代表电路板温度过高
 */
   // int get_mechanicalarm_Maschinen_status(ArmSide side, int deviceInd, int canInd);
   void get_mechanicalarm_status(ArmSide side, int deviceInd, int canInd, int32_t *dataList);
@@ -144,7 +154,6 @@ extern "C"
     DeviceInd：can设备号
   返回值：无*/
   void joint_to_move(ArmSide side, float *goal_j, int deviceInd, int canInd);
-  void new_joint_to_move(ArmSide side, float *goal_j, int deviceInd, int canInd);
 
   /*机械臂关节运动，同时获取当前位置
     参数：
@@ -161,14 +170,10 @@ extern "C"
   参数：
       side：左臂或右臂 （LEFT_ARM 左臂，RIGHT_ARM 右臂）
       pos：目标位置
-      value：dim的值
-      dim：-1~2 代表x,y,z， -1的时候是没有臂角约束，只会接收末端位姿，其他参数忽略
-      absolute：true的时候是绝对位置（以胸部原点位置），false的时候是相对位置（以当前点胳膊轴位置）
       canInd：can通道
       deviceInd：can设备号
   返回值：无
   */
-  // void pos_to_move(ArmSide side, float *pos, float value, int dim, bool absolute, int deviceInd, int canInd);
   bool pos_to_move(ArmSide side, float *pos, int deviceInd, int canInd);
 
   /*获取当前角度
